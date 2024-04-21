@@ -40,11 +40,9 @@
                                 </div>
 
                                 <div class="mb-3 back-btn-light">
-                                    <button class="btn btn-light w-100" type="submit">Logout an Account</button>
+                                    <button onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-light w-100" type="submit">Logout an Account</button>
                                 </div>
-                                <div class="account-signup">
-                                    <p>Already a Member? <a href="">Logout</a></p>
-                                </div>
+
                             </form>
                         </div>
                     </div>

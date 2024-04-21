@@ -55,14 +55,32 @@
                     </li>
                 </ul>
             </div>
-            <ul class="nav header-navbar-rht">
-                <li class="login-in-sixteen">
-                    <a href="{{ route('login') }}" class="open-tabs btn btn-primary reg-btn reg-btn-sixteen"><i class="feather-lock me-2"></i>Login</a>
-                </li>
-                <li class="login-in-sixteen">
-                    <a href="{{ route('register') }}" class="open-tabs btn btn-primary reg-btn reg-btn-sixteen"><i class="feather-user me-2"></i>Sign Up</a>
-                </li>
-            </ul>
+            @if(auth()->check())
+                <div class="header-navbar-rht">
+                    <ul class="main-nav">
+                        <li class="has-submenu">
+                            <a href="#">{{ auth()->user()->name }} <i class="fas fa-chevron-down"></i></a>
+                            <ul class="submenu">
+                                @if(auth()->user()->role == 'Admin')
+                                    <li><a href="{{ route('admin.home') }}">Dashboard</a></li>
+                                @else
+                                    <li><a href="{{ route('user.home') }}">Dashboard</a></li>
+                                @endif
+                                <li><a onclick="event.preventDefault(); document.getElementById('logout-form').submit();" href="javascript:void(0);">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            @else
+                <ul class="nav header-navbar-rht">
+                    <li class="login-in-sixteen">
+                        <a href="{{ route('login') }}" class="open-tabs btn btn-primary reg-btn reg-btn-sixteen"><i class="feather-lock me-2"></i>Login</a>
+                    </li>
+                    <li class="login-in-sixteen">
+                        <a href="{{ route('register') }}" class="open-tabs btn btn-primary reg-btn reg-btn-sixteen"><i class="feather-user me-2"></i>Sign Up</a>
+                    </li>
+                </ul>
+            @endif
         </nav>
     </div>
 </header>

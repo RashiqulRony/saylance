@@ -23,9 +23,13 @@
                                 <p>We'll send a confirmation code to your email.</p>
                             </div>
                             <form action="{{ route('login') }}" method="post">
+                                @csrf
                                 <div class="mb-3">
                                     <label class="mb-2">E-mail</label>
-                                    <input type="text" class="form-control" placeholder="example@email.com" />
+                                    <input type="text" class="form-control" name="email" required placeholder="example@email.com" />
+                                    @error('email')
+                                        <strong class="text-danger">{{ $message }}</strong>
+                                    @enderror
                                 </div>
                                 <div class="mb-3">
                                     <div class="form-group-flex">
@@ -33,9 +37,12 @@
                                         <a href="#" class="open-tabs forgot-link">Forgot password?</a>
                                     </div>
                                     <div class="pass-group">
-                                        <input type="password" class="form-control pass-input" placeholder="*************" />
+                                        <input type="password" name="password" class="form-control pass-input" placeholder="*************" />
                                         <span class="feather-eye-off toggle-password"></span>
                                     </div>
+                                    @error('password')
+                                        <strong class="text-danger">{{ $message }}</strong>
+                                    @enderror
                                 </div>
                                 <div class="mb-3 form-check-box">
                                     <div class="form-group-flex">

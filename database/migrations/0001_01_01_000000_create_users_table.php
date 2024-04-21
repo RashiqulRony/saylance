@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('location')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->enum('role', ['Admin', 'User'])->default('User');
+            $table->enum('status', ['Active', 'Inactive'])->default('Inactive');
             $table->rememberToken();
             $table->timestamps();
         });
