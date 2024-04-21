@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\UserLink;
+use App\Trait\Helper;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    use Helper;
+
     public function home(Request $request)
     {
         $data = null;
@@ -27,7 +30,7 @@ class UserController extends Controller
             [
                 'user_id' => auth('web')->id(),
             ], [
-                'link' => $request->link,
+                'link' => $this->linkCheck($request->link),
                 'status' => 'Active',
             ]
         );

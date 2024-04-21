@@ -68,20 +68,9 @@
                                     <tbody>
                                     @if(count($links) > 0)
                                         @foreach($links as $link)
-                                            @php
-                                                if (substr($link->link, 0, 7) == "http://") {
-                                                   $url = $link->link;
-                                                }elseif (substr($link->link, 0, 8) == "https://") {
-                                                   $url = $link->link;
-                                                }elseif (substr($link->link, 0, 4) == "www.") {
-                                                   $url = "http://$link->link";
-                                                } else {
-                                                   $url = "http://$link->link";
-                                                }
-                                            @endphp
                                         <tr>
                                             <td>{{ $link->user->name }}</td>
-                                            <td><a href="{{ $url }}" target="_blank">{{ $link->link }}</a></td>
+                                            <td><a href="{{ $link->link }}" target="_blank">{{ $link->link }}</a></td>
                                             <td>{{ date('d M, Y', strtotime($link->created_at)) }}</td>
                                             <td>
                                                 <div class="table-action">

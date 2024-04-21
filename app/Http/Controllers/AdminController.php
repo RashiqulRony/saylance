@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\AdminLink;
+use App\Trait\Helper;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+
+    use Helper;
+
     public function home()
     {
         $data = AdminLink::first();
@@ -28,20 +32,4 @@ class AdminController extends Controller
 
         return redirect()->back()->with('success', 'Admin Link save successfully');
     }
-
-
-    private function linkCheck($link)
-    {
-        if (substr($link, 0, 7) == "http://") {
-            $url = $link;
-        }elseif (substr($link, 0, 8) == "https://") {
-            $url = $link;
-        }elseif (substr($link, 0, 4) == "www.") {
-            $url = "http://$link";
-        } else {
-            $url = "http://$link";
-        }
-        return $url;
-    }
-
 }
