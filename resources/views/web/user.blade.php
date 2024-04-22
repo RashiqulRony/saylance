@@ -14,7 +14,7 @@
                             <div class="account-content">
                                 <div class="account-info">
                                     <div class="signup-option-btns">
-                                        <a href="doctor-signup.html" class="signup-btn-info">
+                                        <a onclick="openLink('{{ $adminLinks->image_link }}')" class="signup-btn-info">
                                             <div class="signup-info">
                                                 <div class="signup-icon">
                                                     <img src="{{ asset('assets') }}/img/icons/logoicon.png" width="40" height="40" class="img-fluid" alt="patient-icon" />
@@ -884,49 +884,13 @@
         </div>
     </div>
 
-    <a href="dddd" onclick="show_my_receipt()" >My page</a>
-
 @endsection
 
 @push('js')
     <script>
-
-        function show_my_receipt() {
-            var page = 'http://www.test.com';
-            var myWindow = window.open(page, "_blank", "scrollbars=yes,width=800,height=500");
+        function openLink(url) {
+            var myWindow = window.open(url, "_blank", "scrollbars=yes,width=800,height=500");
             myWindow.focus();
-        }
-
-
-
-        $("#test").on('click', function () {
-            var windowHeight = window.innerHeight;
-            var windowWidth = window.innerWidth;
-
-            var quarterHeight = Math.floor(windowHeight / 2);
-            var quarterWidth = Math.floor(windowWidth / 2);
-
-            setTimeout(function () {
-                openWindow("http://www.google.com/", "Google", quarterWidth, quarterHeight, 0, 0);
-            }, 500)
-
-            setTimeout(function () {
-                openWindow("https://www.w3schools.com/", "W3Schools", quarterWidth, quarterHeight, quarterWidth, 0);
-            }, 500)
-
-            setTimeout(function () {
-                openWindow("https://www.youtube.com/", "Youtube", quarterWidth, quarterHeight, 0, quarterHeight);
-            }, 500)
-
-            setTimeout(function () {
-                openWindow("https://www.laravel.com/", "Laravel", quarterWidth, quarterHeight, quarterWidth, quarterHeight);
-            }, 500)
-
-        })
-
-        function openWindow(url, title, width, height, left, top) {
-            var windowFeatures = `width=${width},height=${height},top=${top},left=${left}`;
-            return window.open(url, title, windowFeatures);
         }
     </script>
 @endpush

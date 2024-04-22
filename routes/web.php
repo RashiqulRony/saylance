@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\UserAuthCheck;
 use App\Http\Middleware\AdminAuthCheck;
@@ -9,6 +10,20 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 
 Auth::routes();
+
+
+Route::get('email-test', function () {
+    $email_data = [
+        'name' => 'Mr. Test',
+        'email' => 'test@test.com',
+    ];
+
+    Mail::send('emails.test', compact('email_data'), function ($message) {
+        $message->to('rony.mmj@gmail.com')->subject('This is test email')->from('saylzfkp@saylance.com');
+    });
+});
+
+
 
 Route::group(['as' => 'web.'], function () {
     Route::get('/', [WebsiteController::class, 'index'])->name('home');
@@ -25,4 +40,5 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth:web'
     Route::get('home', [AdminController::class, 'home'])->name('home');
     Route::post('link-store', [AdminController::class, 'linkStore'])->name('linkStore');
 });
+
 

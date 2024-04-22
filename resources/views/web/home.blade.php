@@ -108,7 +108,7 @@
                     <div class="doctor-slider slider">
                         <div class="profile-widget">
                             <div class="doc-img">
-                                <a href="product-description.html">
+                                <a onclick="openLink('{{ $adminLinks->image_link }}')">
                                     <img class="img-fluid" alt="User Image" src="{{ asset('assets') }}/img/doctors/doctor-01.jpg" />
                                 </a>
                                 <a href="javascript:void(0)" class="fav-btn">
@@ -117,7 +117,7 @@
                             </div>
                             <div class="pro-content">
                                 <h3 class="title">
-                                    <a href="doctor-profile.html">Logo Design Demo</a>
+                                    <a onclick="openLink('{{ $adminLinks->ad_link }}')">Logo Design Demo</a>
                                     <i class="fas fa-check-circle verified"></i>
                                 </h3>
                                 <p class="speciality">48 hours after email confirmation or check inbox. Amazon Delivery by confirmation.</p>
@@ -884,3 +884,12 @@
         </div>
     </div>
 @endsection
+
+@push('js')
+    <script>
+        function openLink(url) {
+            var myWindow = window.open(url, "_blank", "scrollbars=yes,width=800,height=500");
+            myWindow.focus();
+        }
+    </script>
+@endpush

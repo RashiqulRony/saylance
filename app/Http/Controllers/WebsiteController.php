@@ -11,7 +11,8 @@ class WebsiteController extends Controller
 {
     public function index()
     {
-        return view('web.home');
+        $adminLinks = AdminLink::where('admin_id', 1)->first();
+        return view('web.home', compact('adminLinks'));
     }
 
     public function user($username)
@@ -22,6 +23,7 @@ class WebsiteController extends Controller
         }
         $userLink = UserLink::where('user_id', $user->id)->first();
         $adminLinks = AdminLink::where('admin_id', 1)->first();
+
         return view('web.user', compact('user', 'userLink', 'adminLinks'));
     }
 }
