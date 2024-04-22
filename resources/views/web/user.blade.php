@@ -884,13 +884,21 @@
         </div>
     </div>
 
-    <a id="test" >
-        link
-    </a>
+    <a href="dddd" onclick="show_my_receipt()" >My page</a>
+
 @endsection
 
 @push('js')
     <script>
+
+        function show_my_receipt() {
+            var page = 'http://www.test.com';
+            var myWindow = window.open(page, "_blank", "scrollbars=yes,width=800,height=500");
+            myWindow.focus();
+        }
+
+
+
         $("#test").on('click', function () {
             var windowHeight = window.innerHeight;
             var windowWidth = window.innerWidth;
