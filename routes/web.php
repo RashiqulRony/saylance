@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -24,10 +25,10 @@ Route::get('email-test', function () {
 });
 
 
-
 Route::group(['as' => 'web.'], function () {
     Route::get('/', [WebsiteController::class, 'index'])->name('home');
     Route::get('/{username}', [WebsiteController::class, 'user'])->name('user');
+    Route::post('budget-store', [WebsiteController::class, 'budgetStore'])->name('budgetStore');
 });
 
 Route::group(['as' => 'user.', 'prefix' => 'user', 'middleware' => ['auth:web', UserAuthCheck::class]], function () {
@@ -41,4 +42,13 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth:web'
     Route::post('link-store', [AdminController::class, 'linkStore'])->name('linkStore');
 });
 
-
+Route::group(['as' => 'cache.', 'prefix' => 'cache'], function () {
+    Route::get('/clear', function () {
+        Artisan::call('cache:clear');
+        Artisan::call('view:clear');
+        Artisan::call('config:cache');
+        Artisan::call('optimize:clear');
+        Artisan::call('storage:link');
+        dd('All Cleared...');
+    });
+});

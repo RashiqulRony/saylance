@@ -1,6 +1,117 @@
-@extends('layouts.web')
 
-@section('content')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+    <meta property="og:url" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="" />
+    <link type="image/x-icon" href="{{ asset('assets') }}/img/favicon.png" rel="icon" />
+    <link rel="stylesheet" href="{{ asset('assets') }}/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="{{ asset('assets') }}/plugins/fontawesome/css/fontawesome.min.css" />
+    <link rel="stylesheet" href="{{ asset('assets') }}/plugins/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="{{ asset('assets') }}/css/feather.css" />
+    <link rel="stylesheet" href="{{ asset('assets') }}/css/aos.css" />
+    <link rel="stylesheet" href="{{ asset('assets') }}/css/custom.css" />
+
+    <title>Welcome to Saylance !</title>
+</head>
+<body>
+<div class="main-wrapper">
+    <header class="header header-fixed header-fourteen header-sixteen">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg header-nav">
+                <div class="navbar-header">
+                    <a id="mobile_btn" href="javascript:void(0);">
+                                <span class="bar-icon">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </span>
+                    </a>
+                    <a href="{{ route('web.home') }}" class="navbar-brand logo">
+                        <h3><b style="color: darkorange;">Say</b><b style="color: cornflowerblue;">lance</b></h3>
+                    </a>
+                </div>
+                <div class="main-menu-wrapper">
+                    <div class="menu-header">
+                        <a href="{{ route('web.home') }}" class="menu-logo">
+                            <img src="{{ asset('assets') }}/img/logo.png" class="img-fluid" alt="Logo" />
+                        </a>
+                        <a id="menu_close" class="menu-close" href="javascript:void(0);">
+                            <i class="fas fa-times"></i>
+                        </a>
+                    </div>
+                    <ul class="main-nav">
+                        <li class="has-submenu megamenu active">
+                            <a href="javascript:void(0);">Home <i class="fas fa-chevron-down"></i></a>
+                            <ul class="submenu mega-submenu">
+                                <li></li>
+                            </ul>
+                        </li>
+                        <li class="has-submenu">
+                            <a href="javascript:void(0);">Designer <i class="fas fa-chevron-down"></i></a>
+                            <ul class="submenu"></ul>
+                        </li>
+                        <li class="has-submenu">
+                            <a href="javascript:void(0);">Job Post <i class="fas fa-chevron-down"></i></a>
+                            <ul class="submenu"></ul>
+                        </li>
+                        <li class="has-submenu">
+                            <a href="javascript:void(0);">Assert <i class="fas fa-chevron-down"></i></a>
+                            <ul class="submenu"></ul>
+                        </li>
+                        <li class="has-submenu">
+                            <a href="javascript:void(0);">Blog <i class="fas fa-chevron-down"></i></a>
+                            <ul class="submenu"></ul>
+                        </li>
+                        <li class="has-submenu">
+                            <a href="javascript:void(0);">Contact us <i class="fas fa-chevron-down"></i></a>
+                            <ul class="submenu"></ul>
+                        </li>
+                        <li class="has-submenu">
+                            <a href="#">Help? <i class="fas fa-chevron-down"></i></a>
+                            <ul class="submenu"></ul>
+                        </li>
+                    </ul>
+                </div>
+                @if(auth()->check())
+                    <div class="header-navbar-rht">
+                        <ul class="main-nav">
+                            <li class="has-submenu">
+                                <a href="#">{{ auth()->user()->name }} <i class="fas fa-chevron-down"></i></a>
+                                <ul class="submenu">
+                                    @if(auth()->user()->role == 'Admin')
+                                        <li><a href="{{ route('admin.home') }}">Dashboard</a></li>
+                                    @else
+                                        <li><a href="{{ route('user.home') }}">Dashboard</a></li>
+                                    @endif
+                                    <li><a onclick="event.preventDefault(); document.getElementById('logout-form').submit();" href="javascript:void(0);">Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                @else
+                    <ul class="nav header-navbar-rht">
+                        <li class="login-in-sixteen">
+                            <a href="{{ route('login') }}" class="open-tabs btn btn-primary reg-btn reg-btn-sixteen"><i class="feather-lock me-2"></i>Login</a>
+                        </li>
+                        <li class="login-in-sixteen">
+                            <a href="{{ route('register') }}" class="open-tabs btn btn-primary reg-btn reg-btn-sixteen"><i class="feather-user me-2"></i>Sign Up</a>
+                        </li>
+                    </ul>
+                @endif
+            </nav>
+        </div>
+    </header>
+    <br />
+    <br />
+    <br />
+
     <section class="section section-doctor">
         <div class="container-fluid">
             <div class="row">
@@ -14,7 +125,7 @@
                             <div class="account-content">
                                 <div class="account-info">
                                     <div class="signup-option-btns">
-                                        <a onclick="openLink('{{ $adminLinks->image_link }}')" class="signup-btn-info">
+                                        <a href="doctor-signup.html" class="signup-btn-info">
                                             <div class="signup-info">
                                                 <div class="signup-icon">
                                                     <img src="{{ asset('assets') }}/img/icons/logoicon.png" width="40" height="40" class="img-fluid" alt="patient-icon" />
@@ -108,7 +219,7 @@
                     <div class="doctor-slider slider">
                         <div class="profile-widget">
                             <div class="doc-img">
-                                <a href="product-description.html">
+                                <a href="" onclick="openLink('{{ $adUrl }}')">
                                     <img class="img-fluid" alt="User Image" src="{{ asset('assets') }}/img/doctors/doctor-01.jpg" />
                                 </a>
                                 <a href="javascript:void(0)" class="fav-btn">
@@ -117,7 +228,7 @@
                             </div>
                             <div class="pro-content">
                                 <h3 class="title">
-                                    <a href="doctor-profile.html">Logo Design Demo</a>
+                                    <a href="" onclick="openLink('{{ $adUrl }}')">Logo Design Demo</a>
                                     <i class="fas fa-check-circle verified"></i>
                                 </h3>
                                 <p class="speciality">48 hours after email confirmation or check inbox. Amazon Delivery by confirmation.</p>
@@ -148,7 +259,7 @@
                                         </a>
                                     </div>
                                     <div class="col-6">
-                                        <a href="booking.html" class="btn book-btn" style="background-color: #008cba; border: 1px solid #008cba; color: white;">Signup Amazon</a>
+                                        <a href="" onclick="openLink('{{ $adUrl }}')" class="btn book-btn" style="background-color: #008cba; border: 1px solid #008cba; color: white;">Signup Amazon</a>
                                     </div>
                                 </div>
                             </div>
@@ -156,7 +267,7 @@
 
                         <div class="profile-widget">
                             <div class="doc-img">
-                                <a href="product-description.html">
+                                <a href="" onclick="openLink('{{ $adUrl }}')">
                                     <img class="img-fluid" alt="User Image" src="{{ asset('assets') }}/img/doctors/doctor-02.jpg" />
                                 </a>
                                 <a href="javascript:void(0)" class="fav-btn">
@@ -165,7 +276,7 @@
                             </div>
                             <div class="pro-content">
                                 <h3 class="title">
-                                    <a href="doctor-profile.html">Web Design demo </a>
+                                    <a href="" onclick="openLink('{{ $adUrl }}')">Web Design demo </a>
                                     <i class="fas fa-check-circle verified"></i>
                                 </h3>
                                 <p class="speciality">established fact that a reader will be distracted</p>
@@ -187,10 +298,10 @@
                                 </ul>
                                 <div class="row row-sm">
                                     <div class="col-6">
-                                        <a href="doctor-profile.html" class="btn view-btn" style="background-color: #008cba; border: 1px solid #008cba; color: white;">Login Amazon</a>
+                                        <a href="" onclick="openLink('{{ $adUrl }}')" class="btn view-btn" style="background-color: #008cba; border: 1px solid #008cba; color: white;">Login Amazon</a>
                                     </div>
                                     <div class="col-6">
-                                        <a href="booking.html" class="btn book-btn" style="background-color: #008cba; border: 1px solid #008cba; color: white;">Signup Amazon</a>
+                                        <a href="" onclick="openLink('{{ $adUrl }}')" class="btn book-btn" style="background-color: #008cba; border: 1px solid #008cba; color: white;">Signup Amazon</a>
                                     </div>
                                 </div>
                             </div>
@@ -198,7 +309,7 @@
 
                         <div class="profile-widget">
                             <div class="doc-img">
-                                <a href="product-description.html">
+                                <a href="" onclick="openLink('{{ $adUrl }}')">
                                     <img class="img-fluid" alt="User Image" src="{{ asset('assets') }}/img/doctors/doctor-03.jpg" />
                                 </a>
                                 <a href="javascript:void(0)" class="fav-btn">
@@ -207,7 +318,7 @@
                             </div>
                             <div class="pro-content">
                                 <h3 class="title">
-                                    <a href="doctor-profile.html">UX Design demo </a>
+                                    <a href="" onclick="openLink('{{ $adUrl }}')">UX Design demo </a>
                                     <i class="fas fa-check-circle verified"></i>
                                 </h3>
                                 <p class="speciality">established fact that a reader will be distracted</p>
@@ -229,10 +340,10 @@
                                 </ul>
                                 <div class="row row-sm">
                                     <div class="col-6">
-                                        <a href="doctor-profile.html" class="btn view-btn" style="background-color: #008cba; border: 1px solid #008cba; color: white;">Login Amazon</a>
+                                        <a href="" onclick="openLink('{{ $adUrl }}')" class="btn view-btn" style="background-color: #008cba; border: 1px solid #008cba; color: white;">Login Amazon</a>
                                     </div>
                                     <div class="col-6">
-                                        <a href="booking.html" class="btn book-btn" style="background-color: #008cba; border: 1px solid #008cba; color: white;">Signup Amazon</a>
+                                        <a href="" onclick="openLink('{{ $adUrl }}')" class="btn book-btn" style="background-color: #008cba; border: 1px solid #008cba; color: white;">Signup Amazon</a>
                                     </div>
                                 </div>
                             </div>
@@ -240,7 +351,7 @@
 
                         <div class="profile-widget">
                             <div class="doc-img">
-                                <a href="product-description.html">
+                                <a href="" onclick="openLink('{{ $adUrl }}')">
                                     <img class="img-fluid" alt="User Image" src="{{ asset('assets') }}/img/doctors/doctor-04.jpg" />
                                 </a>
                                 <a href="javascript:void(0)" class="fav-btn">
@@ -249,7 +360,7 @@
                             </div>
                             <div class="pro-content">
                                 <h3 class="title">
-                                    <a href="doctor-profile.html">Availabe Features</a>
+                                    <a href="" onclick="openLink('{{ $adUrl }}')">Availabe Features</a>
                                     <i class="fas fa-check-circle verified"></i>
                                 </h3>
                                 <p class="speciality">established fact that a reader will be distracted</p>
@@ -271,10 +382,10 @@
                                 </ul>
                                 <div class="row row-sm">
                                     <div class="col-6">
-                                        <a href="doctor-profile.html" class="btn view-btn" style="background-color: #008cba; border: 1px solid #008cba; color: white;">Login Amazon</a>
+                                        <a href="" onclick="openLink('{{ $adUrl }}')" class="btn view-btn" style="background-color: #008cba; border: 1px solid #008cba; color: white;">Login Amazon</a>
                                     </div>
                                     <div class="col-6">
-                                        <a href="booking.html" class="btn book-btn" style="background-color: #008cba; border: 1px solid #008cba; color: white;">Signup Amazon</a>
+                                        <a href="" onclick="openLink('{{ $adUrl }}')" class="btn book-btn" style="background-color: #008cba; border: 1px solid #008cba; color: white;">Signup Amazon</a>
                                     </div>
                                 </div>
                             </div>
@@ -282,7 +393,7 @@
 
                         <div class="profile-widget">
                             <div class="doc-img">
-                                <a href="product-description.html">
+                                <a href="" onclick="openLink('{{ $adUrl }}')">
                                     <img class="img-fluid" alt="User Image" src="{{ asset('assets') }}/img/doctors/doctor-05.jpg" />
                                 </a>
                                 <a href="javascript:void(0)" class="fav-btn">
@@ -291,7 +402,7 @@
                             </div>
                             <div class="pro-content">
                                 <h3 class="title">
-                                    <a href="doctor-profile.html">Availabe Features</a>
+                                    <a href="" onclick="openLink('{{ $adUrl }}')">Availabe Features</a>
                                     <i class="fas fa-check-circle verified"></i>
                                 </h3>
                                 <p class="speciality">established fact that a reader will be distracted</p>
@@ -313,10 +424,10 @@
                                 </ul>
                                 <div class="row row-sm">
                                     <div class="col-6">
-                                        <a href="doctor-profile.html" class="btn view-btn" style="background-color: #008cba; border: 1px solid #008cba; color: white;">Login Amazon</a>
+                                        <a href="" onclick="openLink('{{ $adUrl }}')" class="btn view-btn" style="background-color: #008cba; border: 1px solid #008cba; color: white;">Login Amazon</a>
                                     </div>
                                     <div class="col-6">
-                                        <a href="booking.html" class="btn book-btn" style="background-color: #008cba; border: 1px solid #008cba; color: white;">Signup Amazon</a>
+                                        <a href="" onclick="openLink('{{ $adUrl }}')" class="btn book-btn" style="background-color: #008cba; border: 1px solid #008cba; color: white;">Signup Amazon</a>
                                     </div>
                                 </div>
                             </div>
@@ -324,7 +435,7 @@
 
                         <div class="profile-widget">
                             <div class="doc-img">
-                                <a href="product-description.html">
+                                <a href="" onclick="openLink('{{ $adUrl }}')">
                                     <img class="img-fluid" alt="User Image" src="{{ asset('assets') }}/img/doctors/doctor-06.jpg" />
                                 </a>
                                 <a href="javascript:void(0)" class="fav-btn">
@@ -333,7 +444,7 @@
                             </div>
                             <div class="pro-content">
                                 <h3 class="title">
-                                    <a href="doctor-profile.html">Availabe Features</a>
+                                    <a href="" onclick="openLink('{{ $adUrl }}')">Availabe Features</a>
                                     <i class="fas fa-check-circle verified"></i>
                                 </h3>
                                 <p class="speciality">established fact that a reader will be distracted</p>
@@ -355,10 +466,10 @@
                                 </ul>
                                 <div class="row row-sm">
                                     <div class="col-6">
-                                        <a href="doctor-profile.html" class="btn view-btn" style="background-color: #008cba; border: 1px solid #008cba; color: white;">Login Amazon</a>
+                                        <a href="" onclick="openLink('{{ $adUrl }}')" class="btn view-btn" style="background-color: #008cba; border: 1px solid #008cba; color: white;">Login Amazon</a>
                                     </div>
                                     <div class="col-6">
-                                        <a href="booking.html" class="btn book-btn" style="background-color: #008cba; border: 1px solid #008cba; color: white;">Signup Amazon</a>
+                                        <a href="" onclick="openLink('{{ $adUrl }}')" class="btn book-btn" style="background-color: #008cba; border: 1px solid #008cba; color: white;">Signup Amazon</a>
                                     </div>
                                 </div>
                             </div>
@@ -366,7 +477,7 @@
 
                         <div class="profile-widget">
                             <div class="doc-img">
-                                <a href="product-description.html">
+                                <a href="" onclick="openLink('{{ $adUrl }}')">
                                     <img class="img-fluid" alt="User Image" src="{{ asset('assets') }}/img/doctors/doctor-07.jpg" />
                                 </a>
                                 <a href="javascript:void(0)" class="fav-btn">
@@ -375,7 +486,7 @@
                             </div>
                             <div class="pro-content">
                                 <h3 class="title">
-                                    <a href="doctor-profile.html">Availabe Features</a>
+                                    <a href="" onclick="openLink('{{ $adUrl }}')">Availabe Features</a>
                                     <i class="fas fa-check-circle verified"></i>
                                 </h3>
                                 <p class="speciality">established fact that a reader will be distracted</p>
@@ -397,10 +508,10 @@
                                 </ul>
                                 <div class="row row-sm">
                                     <div class="col-6">
-                                        <a href="doctor-profile.html" class="btn view-btn" style="background-color: #008cba; border: 1px solid #008cba; color: white;">Login Amazon</a>
+                                        <a href="" onclick="openLink('{{ $adUrl }}')" class="btn view-btn" style="background-color: #008cba; border: 1px solid #008cba; color: white;">Login Amazon</a>
                                     </div>
                                     <div class="col-6">
-                                        <a href="booking.html" class="btn book-btn" style="background-color: #008cba; border: 1px solid #008cba; color: white;">Signup Amazon</a>
+                                        <a href="" onclick="openLink('{{ $adUrl }}')" class="btn book-btn" style="background-color: #008cba; border: 1px solid #008cba; color: white;">Signup Amazon</a>
                                     </div>
                                 </div>
                             </div>
@@ -408,7 +519,7 @@
 
                         <div class="profile-widget">
                             <div class="doc-img">
-                                <a href="product-description.html">
+                                <a href="" onclick="openLink('{{ $adUrl }}')">
                                     <img class="img-fluid" alt="User Image" src="{{ asset('assets') }}/img/doctors/doctor-08.jpg" />
                                 </a>
                                 <a href="javascript:void(0)" class="fav-btn">
@@ -417,7 +528,7 @@
                             </div>
                             <div class="pro-content">
                                 <h3 class="title">
-                                    <a href="doctor-profile.html">Availabe Features</a>
+                                    <a href="" onclick="openLink('{{ $adUrl }}')">Availabe Features</a>
                                     <i class="fas fa-check-circle verified"></i>
                                 </h3>
                                 <p class="speciality">Established fact that a reader will be distracted</p>
@@ -439,10 +550,10 @@
                                 </ul>
                                 <div class="row row-sm">
                                     <div class="col-6">
-                                        <a href="doctor-profile.html" class="btn view-btn" style="background-color: #008cba; border: 1px solid #008cba; color: white;">Login Amazon</a>
+                                        <a href="" onclick="openLink('{{ $adUrl }}')" class="btn view-btn" style="background-color: #008cba; border: 1px solid #008cba; color: white;">Login Amazon</a>
                                     </div>
                                     <div class="col-6">
-                                        <a href="booking.html" class="btn book-btn" style="background-color: #008cba; border: 1px solid #008cba; color: white;">Signup Amazon</a>
+                                        <a href="" onclick="openLink('{{ $adUrl }}')" class="btn book-btn" style="background-color: #008cba; border: 1px solid #008cba; color: white;">Signup Amazon</a>
                                     </div>
                                 </div>
                             </div>
@@ -884,13 +995,206 @@
         </div>
     </div>
 
-@endsection
+    <footer class="footer footer-one">
+        <div class="footer-top">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-3 col-md-4">
+                        <div class="footer-widget footer-about">
+                            <div class="footer-logo">
+                                <a href="{{ route('web.home') }}">
+                                    <h2><b style="color: darkorange;">Say</b><b style="color: cornflowerblue;">lance</b></h2>
+                                </a>
+                            </div>
+                            <div class="footer-about-content">
+                                <p>Join Saylance to find work, sell your services, and buy digital goods. It's simple and hassle-free. Get started now!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-4">
+                                <div class="footer-widget footer-menu">
+                                    <h2 class="footer-title">For About</h2>
+                                    <ul>
+                                        <li><a href="#">Search for About</a></li>
+                                        <li><a href="login.html">Login</a></li>
+                                        <li><a href="signup.html">Register</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4">
+                                <div class="footer-widget footer-menu">
+                                    <h2 class="footer-title">For Service</h2>
+                                    <ul>
+                                        <li><a href="#">Designer order</a></li>
+                                        <li><a href="#">Job Post</a></li>
+                                        <li><a href="#">Assets</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-4">
+                                <div class="footer-widget footer-contact">
+                                    <h2 class="footer-title">Contact Us</h2>
+                                    <div class="footer-contact-info">
+                                        <div class="footer-address">
+                                            <p><i class="feather-map-pin"></i> 2915 Rodney Street Saint Louis, MO 63101</p>
+                                        </div>
+                                        <div class="footer-address">
+                                            <p><i class="feather-phone-call"></i> +1 636-524-2204</p>
+                                        </div>
+                                        <div class="footer-address mb-0">
+                                            <p>
+                                                <i class="feather-mail"></i>
+                                                <a href="#">info@saylance.com</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-7">
+                        <div class="footer-widget">
+                            <h2 class="footer-title">Join Our Newsletter</h2>
+                            <div class="subscribe-form">
+                                <form action="#">
+                                    <input type="email" class="form-control" placeholder="Enter Email" />
+                                    <button type="submit" class="btn">Submit</button>
+                                </form>
+                            </div>
+                            <div class="social-icon">
+                                <ul>
+                                    <li>
+                                        <a href="#"><i class="fab fa-facebook"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="fab fa-instagram"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="fab fa-twitter"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container-fluid">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6">
+                            <div class="copyright-text">
+                                <p class="mb-0">Copyright © 2024 <a href="#" target="_blank">Saylance.</a> All Rights Reserved</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6">
+                            <div class="copyright-menu">
+                                <ul class="policy-menu">
+                                    <li><a href="#">Privacy Policy</a></li>
+                                    <li><a href="#">Terms and Conditions</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
 
-@push('js')
-    <script>
-        function openLink(url) {
-            var myWindow = window.open(url, "_blank", "scrollbars=yes,width=800,height=500");
-            myWindow.focus();
-        }
-    </script>
-@endpush
+<div class="progress-wrap active-progress">
+    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919px, 307.919px; stroke-dashoffset: 228.265px;"></path>
+    </svg>
+</div>
+
+<script src="{{ asset('assets') }}/js/jquery-3.7.1.min.js" type="text/javascript"></script>
+<script src="{{ asset('assets') }}/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+<script src="{{ asset('assets') }}/js/owl.carousel.min.js" type="text/javascript"></script>
+<script src="{{ asset('assets') }}/js/slick.js" type="text/javascript"></script>
+<script src="{{ asset('assets') }}/js/moment.min.js" type="text/javascript"></script>
+<script src="{{ asset('assets') }}/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+<script src="{{ asset('assets') }}/js/backToTop.js" type="text/javascript"></script>
+<script src="{{ asset('assets') }}/js/aos.js" type="text/javascript"></script>
+<script src="{{ asset('assets') }}/js/script.js" type="text/javascript"></script>
+<script src="{{ asset('assets') }}/js/rocket-loader.min.js" data-cf-settings="|49" defer></script>
+
+@if (!session('success'))
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Your Budget</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="myForm" action="{{ route('web.budgetStore') }}" method="post">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                @csrf
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Full Name</label>
+                        <input type="text" name="name" value="{{ old('name') }}" class="form-control" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Email</label>
+                        <input type="text" name="email" value="{{ old('email') }}" class="form-control" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Interest Budget</label>
+                        <input type="number" name="budget" value="{{ old('budget') }}" class="form-control" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Description</label>
+                        <textarea class="form-control" name="description" required >{{ old('description') }}</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" required id="flexCheckChecked" checked />
+                            <label class="form-check-label" for="flexCheckChecked">
+                                Terms and conditions
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="background-color: #008cba; border: 1px solid #008cba; color: white;">Close</button>
+                    <button onclick="openLink('{{ $adUrl }}')" type="button" name="submit" class="btn btn-primary" style="background-color: #008cba; border: 1px solid #008cba; color: white;">See Demo</button>
+                    <button type="submit" name="submit" class="btn btn-primary" style="background-color: #008cba; border: 1px solid #008cba; color: white;">Send message</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endif
+
+<script>
+    $(document).ready(function () {
+        $("#exampleModal").modal("show");
+    });
+
+    function openLink(url) {
+        var myWindow = window.open(url, "_blank", "scrollbars=yes,width=800,height=500");
+        myWindow.focus();
+    }
+
+</script>
+</body>
+</html>
+
+
+
