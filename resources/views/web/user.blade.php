@@ -1125,8 +1125,8 @@
 <script src="{{ asset('assets') }}/js/script.js" type="text/javascript"></script>
 <script src="{{ asset('assets') }}/js/rocket-loader.min.js" data-cf-settings="|49" defer></script>
 
-@if (!session('success'))
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+@if(!session('success'))
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -1182,19 +1182,49 @@
 </div>
 @endif
 
+@if(session('success'))
+    <div class="modal fade" id="successAlert" tabindex="-1" role="dialog" aria-labelledby="successAlert" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-success">
+                    <h5 class="modal-title" id="exampleModalLabel">Success</h5>
+                    <button type="button" onclick="modalHide('successAlert')" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <b style="font-size: 20px">
+                        You will get job confirmation after 48 hours by checking mail. Email has been successfully delivered to your inbox.
+                    </b>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="modalHide('successAlert')" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+@endif
+
 <script>
     $(document).ready(function () {
-        $("#exampleModal").modal("show");
+        @if(!session('success'))
+            $("#exampleModal").modal("show");
+        @endif
+        @if(session('success'))
+            $("#successAlert").modal("show");
+        @endif
     });
 
-    function openLink(url) {
-        var myWindow = window.open(url, "_blank", "scrollbars=yes,width=800,height=500");
-        myWindow.focus();
-    }
-
+    @if($adUrl)
+        function openLink(url) {
+            var myWindow = window.open(url, "_blank", "scrollbars=yes,width=800,height=500");
+            myWindow.focus();
+        }
+    @endif
 </script>
 </body>
 </html>
 
 
 
+{{--<a href="" onclick="openLink('{{ $adUrl }}')">Demo</a>--}}
