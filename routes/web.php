@@ -39,7 +39,16 @@ Route::group(['as' => 'user.', 'prefix' => 'user', 'middleware' => ['auth:web', 
 
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth:web', AdminAuthCheck::class]], function () {
     Route::get('home', [AdminController::class, 'home'])->name('home');
+    Route::get('links', [AdminController::class, 'links'])->name('links');
     Route::post('link-store', [AdminController::class, 'linkStore'])->name('linkStore');
+    Route::get('link/{link_id}', [AdminController::class, 'linkEdit'])->name('linkEdit');
+    Route::post('link/{link_id}/update', [AdminController::class, 'linkUpdate'])->name('linkUpdate');
+    Route::get('link/{link_id}/delete', [AdminController::class, 'linkDelete'])->name('linkDelete');
+
+    Route::get('users', [AdminController::class, 'users'])->name('users');
+    Route::get('budgets', [AdminController::class, 'budgets'])->name('budgets');
+
+
 });
 
 Route::group(['as' => 'cache.', 'prefix' => 'cache'], function () {

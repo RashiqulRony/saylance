@@ -18,8 +18,7 @@ class WebsiteController extends Controller
 
     public function index()
     {
-        $adminLinks = AdminLink::where('admin_id', 1)->first();
-        return view('web.home', compact('adminLinks'));
+        return view('web.home');
     }
 
     public function user($username)
@@ -32,23 +31,18 @@ class WebsiteController extends Controller
         $userLink = UserLink::where('user_id', $user->id)->first();
 
         if ($userLink) {
-            $adminLink = AdminLink::where('admin_id', 1)->first();
+            $adminLinks = AdminLink::get();
             $links = [];
             if ($userLink->link) {
                 $links[] = $userLink->link;
             }
-            if ($adminLink->bottom_link) {
-                $links[] = $adminLink->bottom_link;
+
+            if (count($adminLinks) > 0) {
+                foreach ($adminLinks as $adminLink) {
+                    $links[] = $adminLink->ad_link;
+                }
             }
-            if ($adminLink->image_link) {
-                $links[] = $adminLink->image_link;
-            }
-            if ($adminLink->text_link) {
-                $links[] = $adminLink->text_link;
-            }
-            if ($adminLink->ad_link) {
-                $links[] = $adminLink->ad_link;
-            }
+
             $al = $this->storeLink($links, $ip);
             if ($al['data']) {
                 $adUrl = $al['data']->links;
