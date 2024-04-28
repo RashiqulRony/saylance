@@ -42,8 +42,8 @@ class WebsiteController extends Controller
                     $links[] = $adminLink->ad_link;
                 }
             }
-
             $al = $this->storeLink($links, $ip);
+
             if ($al['data']) {
                 $adUrl = $al['data']->links;
             } else {
@@ -73,7 +73,7 @@ class WebsiteController extends Controller
         ]);
 
         if ($data) {
-            Mail::send('emails.test', compact($data), function ($message) use ($data) {
+            Mail::send('emails.budget', compact('data'), function ($message) use ($data) {
                 $message->to($data->email)->subject('Budget from saylance')->from('saylzfkp@saylance.com');
             });
         }

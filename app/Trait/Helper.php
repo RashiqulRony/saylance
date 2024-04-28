@@ -29,7 +29,8 @@ trait Helper
                         'ip_address' => $ip,
                         'links' => $links[$key],
                     ],[
-                        'links' => $link
+                        'links' => $link,
+                        'use_time' => date("Y-m-d H:i:s", strtotime('-26 hours')),
                     ]
                 );
             }
@@ -49,7 +50,7 @@ trait Helper
     {
         $adLink = new AdLink();
         $date = date("Y-m-d H:i:s");
-        $dateCheck = $adLink->where('ip_address', $ip)->where('use_time', '<', $date)->orWhere('use_time', '=', null)->count();
+        $dateCheck = $adLink->where('ip_address', $ip)->where('use_time', '<', $date)->count();
 
         if ($dateCheck > 0) {
             $activeCheck = $adLink->where('ip_address', $ip)->where('status', 'Active')->first();
@@ -67,7 +68,7 @@ trait Helper
                     'status' => 'Inactive',
                 ]);
             } else {
-                $adLink->where('ip_address', $ip)->where('use_time', '<', $date)->orWhere('use_time', '=', null)->first()->update([
+                $adLink->where('ip_address', $ip)->where('use_time', '<', $date)->first()->update([
                     'status' => 'Active',
                     'use_time' => date("Y-m-d H:i:s", strtotime('+25 hours'))
                 ]);
